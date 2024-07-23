@@ -1,8 +1,8 @@
 import * as React from "react"
-
+import { ThemeProvider } from "@/context/themeprovider"
 function App() {
 
-  return (<>  </>
+  return (<ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">  </ThemeProvider>
   )
 }
 
