@@ -6,9 +6,16 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel"
+import Autoplay from "embla-carousel-autoplay"
+
+
 function NewsCarousel() {
     return (
-        <Carousel className="w-full max-w-[100%]">
+        <Carousel className="w-full max-w-[100%]" plugins={[
+            Autoplay({
+                delay: 2000,
+            }),
+        ]}>
             <CarouselContent>
                 {Array.from({ length: 5 }).map((_, index) => (
                     <CarouselItem key={index}>
