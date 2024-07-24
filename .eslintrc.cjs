@@ -21,6 +21,14 @@ module.exports = {
         args: 'after-used',
         ignoreRestSiblings: true
       }
+    ],
+    'no-empty-pattern': [
+      'off',
+      {
+        vars: 'all',
+        args: 'after-used',
+        ignoreRestSiblings: true
+      }
     ]
   },
 }

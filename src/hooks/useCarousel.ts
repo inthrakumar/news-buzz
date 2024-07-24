@@ -15,7 +15,10 @@ const useCarousel = () => {
             'x-api-key': env.world_news_api,
           },
         });
+        setNews(response.data.topnews);
         console.log(response);
+        console.log(response.data.topnews);
+        console.log(news);
       } catch (error) {
         console.error(error);
       }
