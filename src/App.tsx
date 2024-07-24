@@ -5,7 +5,6 @@ import Home from './pages/Home';
 import { ThemeProvider } from './context/themeprovider';
 import { Provider } from 'react-redux';
 import { store } from "./redux/store"
-import { Store } from 'lucide-react';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>

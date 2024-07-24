@@ -3,22 +3,19 @@ import axios from 'axios';
 import env from '../env';
 
 const useCarousel = () => {
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState(null);
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
         const response = await axios({
-          url: 'https://api.worldnewsapi.com/top-news?source-country=us&language=en&date=2024-05-29',
+          url: 'https://api.worldnewsapi.com/top-news?source-country=us&language=en',
           method: 'GET',
           headers: {
             'x-api-key': env.world_news_api,
           },
         });
-        setNews(response.data.topnews);
-        console.log(response);
-        console.log(response.data.topnews);
-        console.log(news);
+        setNews(response.data.top_news);
       } catch (error) {
         console.error(error);
       }
@@ -26,7 +23,6 @@ const useCarousel = () => {
 
     fetchNews();
   }, []);
-
   return news;
 };
 
