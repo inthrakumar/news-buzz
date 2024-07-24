@@ -5,9 +5,13 @@ import {
     CarouselItem
 } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
-
+import { useState, useEffect } from "react"
+import useCarousel from "@/hooks/useCarousel"
 
 function NewsCarousel() {
+    const [newsitems, setItems] = useState([])
+    useEffect(() => { }, [])
+    useCarousel();
     return (
         <Carousel className="w-full max-w-[100%]" plugins={[
             Autoplay({
