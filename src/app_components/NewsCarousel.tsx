@@ -5,34 +5,45 @@ import {
     CarouselItem
 } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
-import { useState, useEffect } from "react"
-import useCarousel from "@/hooks/useCarousel"
+import { Link } from "react-router-dom"
+import type { AxiosResponse } from "axios"
 
-function NewsCarousel() {
-    const [newsitems, setItems] = useState([])
-    useEffect(() => { }, [])
-    useCarousel();
+type NewsItem = {
+    newsItems: AxiosResponse["data"];
+}
+function NewsCarousel(newsItems: NewsItem[]) {
     return (
-        <Carousel className="w-full max-w-[100%]" plugins={[
-            Autoplay({
-                delay: 2000,
-            }),
-        ]}>
+        <Carousel
+            className="w-full max-w-[100%]"
+            plugins={[
+                Autoplay({
+                    delay: 3000,
+                }),
+            ]}
+        >
             <CarouselContent>
-                {Array.from({ length: 5 }).map((_, index) => (
-                    <CarouselItem key={index}>
-                        <div className="p-1">
-                            <Card>
-                                <CardContent className="flex  items-center justify-center p-6">
-                                    <span className="text-4xl font-semibold">{index + 1}</span>
+                {newsItems.slice(0, 5).map((item: any, index: any) => {
+                    const imageUrl = item.image;
+
+                    return (
+                        <CarouselItem key={index} className="h-inherit">
+                            <Card
+                                className="bg-cover bg-center"
+                                style={{ backgroundImage: `url('${imageUrl}')`, height: '350px' }}
+                            >
+                                <CardContent className="flex items-end w-inherit h-[350px] justify-center p-6">
+                                    <Link key={item.id} to={`/news/${item.id}`}>
+                                        <span className="text-2xl font-semibold text-[#fff]">
+                                            {item.title}
+                                        </span>
+                                    </Link>
                                 </CardContent>
                             </Card>
-                        </div>
-                    </CarouselItem>
-                ))}
+                        </CarouselItem>
+                    );
+                })}
             </CarouselContent>
-        </Carousel>
-    )
+        </Carousel>)
 }
 
 

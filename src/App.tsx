@@ -3,8 +3,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import Layout from './app_components/Layout';
 import Home from './pages/Home';
 import { ThemeProvider } from './context/themeprovider';
-import { Provider } from 'react-redux';
-import { store } from "./redux/store"
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
@@ -17,8 +16,8 @@ function App() {
   return (
 
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-      <Provider store={store}>      <RouterProvider router={router} />
-      </Provider>
+      <RouterProvider router={router} />
+
     </ThemeProvider>
   );
 }

@@ -29,6 +29,14 @@ module.exports = {
         args: 'after-used',
         ignoreRestSiblings: true
       }
+    ],
+    '@typescript-eslint/no-explicit-any': [
+      'off',
+      {
+        vars: 'all',
+        args: 'after-used',
+        ignoreRestSiblings: true
+      }
     ]
   },
 }
