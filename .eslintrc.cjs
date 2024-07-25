@@ -37,6 +37,14 @@ module.exports = {
         args: 'after-used',
         ignoreRestSiblings: true
       }
+    ],
+    'no-undef': [
+      'off',
+      {
+        vars: 'all',
+        args: 'after-used',
+        ignoreRestSiblings: true
+      }
     ]
   },
 }

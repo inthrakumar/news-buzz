@@ -3,7 +3,7 @@ import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carouse
 import Autoplay from "embla-carousel-autoplay";
 import { Link } from "react-router-dom";
 import type { TopNews } from '@/types/newsarticle';
-
+import "@fontsource/roboto"
 interface NewsCarouselProps {
     top_news: TopNews | undefined;
 }
@@ -30,14 +30,14 @@ function NewsCarousel({ top_news }: NewsCarouselProps) {
                     const id = newsItem.id.toString();
 
                     return (
-                        <CarouselItem key={index} className="h-inherit">
+                        <CarouselItem key={index} className="h-inherit font-roboto">
                             <Card
-                                className="bg-cover bg-center"
+                                className="bg-cover bg-top"
                                 style={{ backgroundImage: `url('${imageUrl}')`, height: '350px' }}
                             >
                                 <CardContent className="flex items-end w-inherit h-[350px] justify-center p-6">
                                     <Link to={`/news/${id}`}>
-                                        <span className="text-2xl font-semibold text-[#fff]">
+                                        <span className="text-2xl max-md:text-xl max-sm:text-[1rem] font-roboto font-semibold text-[#fff]">
                                             {title}
                                         </span>
                                     </Link>
