@@ -3,8 +3,8 @@ import { Card, CardContent, CardHeader, CardDescription } from '@/components/ui/
 import { Link } from 'react-router-dom';
 import { News } from '@/types/newsarticle';
 import "@fontsource/poppins";
-
-function NewsCard({ news }: { news: News }) {
+type NewsCard = { news: News }
+function NewsCard({ news }: NewsCard) {
     return (
         <section className='w-full h-[280px]'>
             <Link to={`/news/${news.id}`}>
