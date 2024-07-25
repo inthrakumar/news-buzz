@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import axios from 'axios';
+import env from '../env';
 
 const options = {
   enableHighAccuracy: true,
@@ -6,19 +7,31 @@ const options = {
 };
 
 const useCoordinates = async () => {
-  const [coords, setCoords] = useState<GeolocationCoordinates | null>(null);
   try {
     const position = await new Promise<GeolocationPosition>(
       (resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject, options);
       }
     );
-    setCoords(position.coords);
+
+    const response = await axios.get(
+      'https://api.geoapify.com/v1/geocode/reverse',
+      {
+        params: {
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+          apiKey: env.geo_api_key,
+        },
+      }
+    );
+
+    const { country, country_code } = response.data.features[0].properties;
+
+    return { country, country_code };
   } catch (error) {
     console.error('Error getting geolocation:', error);
+    return null;
   }
-
-  return coords;
 };
 
 export default useCoordinates;
