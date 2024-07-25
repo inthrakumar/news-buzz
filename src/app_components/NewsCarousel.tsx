@@ -24,26 +24,34 @@ function NewsCarousel({ top_news }: NewsCarouselProps) {
         >
             <CarouselContent>
                 {top_news.slice(0, 5).map((newsGroup, index) => {
-                    const newsItem = newsGroup.news[0];
+                    const newsItem = newsGroup.news[2];
                     const imageUrl = newsItem.image || '';
                     const title = newsItem.title || 'No title';
                     const id = newsItem.id.toString();
-
+                    console.log(imageUrl);
                     return (
                         <CarouselItem key={index} className="h-inherit font-roboto">
                             <Card
-                                className="bg-cover bg-top"
-                                style={{ backgroundImage: `url('${imageUrl}')`, height: '350px' }}
-                            >
-                                <CardContent className="flex items-end w-inherit h-[350px] justify-center p-6">
+                                className="relative bg-cover bg-center"
+                                style={{
+                                    backgroundImage: `url('${imageUrl}')`,
+                                    height: '350px',
+                                    backgroundSize: 'cover', backgroundRepeat: 'no-repeat',
+                                    backgroundPosition: 'center',
+                                    imageRendering: 'auto'
+                                }}                            >
+                                {/* Overlay for dimming the background */}
+                                <div className="absolute inset-0 bg-black opacity-50"></div>
+                                <CardContent className="relative flex items-end w-inherit h-[350px] justify-center p-6">
                                     <Link to={`/news/${id}`}>
-                                        <span className="text-2xl max-md:text-xl max-sm:text-[1rem] font-roboto font-semibold text-[#fff]">
+                                        <span className="text-2xl max-md:text-xl text-white max-sm:text-[1rem] font-roboto font-semibold text-[#fff]">
                                             {title}
                                         </span>
                                     </Link>
                                 </CardContent>
                             </Card>
                         </CarouselItem>
+
                     );
                 })}
             </CarouselContent>
