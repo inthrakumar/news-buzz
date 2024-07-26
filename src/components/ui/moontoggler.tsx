@@ -1,22 +1,25 @@
-import { Moon } from "lucide-react"
-
-import { Button } from "./button"
+import { Moon, Sun } from "lucide-react";
+import { Button } from "./button";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from "./dropdown-menu"
-import { useTheme } from "../../context/themeprovider"
+} from "./dropdown-menu";
+import { useTheme } from "../../context/themeprovider";
 
 function ModeToggle() {
-    const { setTheme } = useTheme()
+    const { theme, setTheme } = useTheme();
 
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="icon">
-                    <Moon fill="grey" className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0  transition-all dark:rotate-0 dark:scale-100" />
+                    {theme === "dark" ? (
+                        <Sun className="w-6 h-6" />
+                    ) : (
+                        <Moon fill="currentColor" className="w-6 h-6" />
+                    )}
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -31,6 +34,7 @@ function ModeToggle() {
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
-    )
+    );
 }
+
 export default ModeToggle;

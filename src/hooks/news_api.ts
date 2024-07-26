@@ -1,7 +1,6 @@
 import axios from 'axios';
 import env from '../env';
-import type { TopNews } from '@/types/newsarticle';
-
+import { TopNews } from '@/types/types';
 const fetchTopNews = async (): Promise<TopNews> => {
   let response: any;
 

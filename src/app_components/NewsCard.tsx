@@ -7,7 +7,6 @@ import "@fontsource/poppins";
 type NewsCardProps = { news: News };
 
 function NewsCard({ news }: NewsCardProps) {
-    console.log(news.text);
     return (
         <section className='w-full h-[280px]'>
             <Link to={`/news/${news.id}`} className='w-full h-full'>
@@ -21,12 +20,15 @@ function NewsCard({ news }: NewsCardProps) {
                             />
                         </CardContent>
                         <CardContent className='w-1/2 p-4 flex flex-col justify-between'>
-                            <div className='text-[1rem] max-sm:text-[12px] max-lg:text-[14px] font-poppins'>
+                            <div className='text-[1rem] max-sm:text-[12px] max-lg:text-[14px] font-poppins overflow-hidden text-ellipsis' style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
                                 {news.title}
                             </div>
+                            <div className='text-[1rem] max-sm:text-[12px] max-lg:text-[14px] font-poppins overflow-hidden text-ellipsis' style={{ display: '-webkit-box', WebkitLineClamp: 5, WebkitBoxOrient: 'vertical' }}>
+                                {news.summary}
+                            </div>
                             <div className='flex flex-col justify-end space-x-1 text-sm'>
-                                <span className='text-nowrap text-clip'>{news.author}</span>
-                                <span className='text-nowrap text-clip'>{news.publish_date}</span>
+                                <span className='overflow-hidden text-ellipsis whitespace-nowrap'>{news.author}</span>
+                                <span className='overflow-hidden text-ellipsis whitespace-nowrap'>{news.publish_date}</span>
                             </div>
                         </CardContent>
                     </Card>

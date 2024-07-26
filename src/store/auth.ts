@@ -7,6 +7,8 @@ type State = {
   country: string | null;
   country_code: string | null;
   hydrated: boolean;
+  longitude: number | null;
+  latitude: number | null;
 };
 
 type Actions = {
@@ -19,6 +21,8 @@ export const AuthStore = create<State & Actions>()(
       isLocation: false,
       country: null,
       country_code: null,
+      longitude: null,
+      latitude: null,
       hydrated: false,
       setHydrated() {
         set({ hydrated: true });

@@ -63,7 +63,19 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+
+:root[data-theme='light'] {
+  --moon-color: yellow;
+  --sun-color: gray;
+}
+
+:root[data-theme='dark'] {
+  --moon-color: gray;
+  --sun-color: yellow;
 }

@@ -3,11 +3,6 @@ import axios from 'axios';
 import env from '../env';
 import { AuthStore } from '@/store/auth';
 
-const options = {
-  enableHighAccuracy: true,
-  timeout: 10000,
-};
-
 type Coords = {
   country?: string | null;
   country_code?: string | null;
@@ -28,32 +23,27 @@ const useCoordinates = (): Coords => {
           setCoords({ country, country_code });
           return;
         }
+        const response = await axios.get(`https://api.ipify.org?format=json`);
+        const { ip } = response.data;
+        const geo_response = await axios.get(`https://api.ipify.org`, {
+          params: {
+            key: env.location_api_key,
+            ip: ip,
+            format: 'json',
+          },
+        });
 
-        const position = await new Promise<GeolocationPosition>(
-          (resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject, options);
-          }
-        );
-
-        const response = await axios.get(
-          'https://api.geoapify.com/v1/geocode/reverse',
-          {
-            params: {
-              lat: position.coords.latitude,
-              lon: position.coords.longitude,
-              apiKey: env.geo_api_key,
-            },
-          }
-        );
-
-        const newCountry = response.data.features[0].properties.country;
-        const newCountryCode =
-          response.data.features[0].properties.country_code;
+        const newCountry = geo_response.data.country_name;
+        const newCountryCode = geo_response.data.country_code;
+        const latitude = geo_response.data.latitude;
+        const longitude = geo_response.data.longitude;
 
         AuthStore.setState((state) => ({
           ...state,
           country: newCountry,
           country_code: newCountryCode,
+          latitude,
+          longitude,
           isLocation: true,
         }));
 

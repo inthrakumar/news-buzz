@@ -1,6 +1,6 @@
-import { TopNews } from '@/types/newsarticle';
+import { TopNews } from '@/types/types';
 import NewsCard from './NewsCard';
-import { News } from '../types/newsarticle';
+import { News } from '../types/types';
 
 type NewsListProps = { topnews: TopNews | undefined };
 
