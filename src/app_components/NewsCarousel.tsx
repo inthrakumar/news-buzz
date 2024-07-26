@@ -31,12 +31,11 @@ function NewsCarousel({ top_news }: NewsCarouselProps) {
                     return (
                         <CarouselItem key={index} className="h-inherit font-roboto">
                             <Card
-                                className="relative bg-cover bg-center"
+                                className="relative bg-cover"
                                 style={{
                                     backgroundImage: `url('${imageUrl}')`,
                                     height: '350px',
                                     backgroundSize: 'cover', backgroundRepeat: 'no-repeat',
-                                    backgroundPosition: 'center',
                                     imageRendering: 'auto'
                                 }}                            >
                                 {/* Overlay for dimming the background */}
