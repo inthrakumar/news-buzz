@@ -10,7 +10,6 @@ function Home() {
         refetchOnWindowFocus: false,
         refetchOnReconnect: false,
     });
-    console.log(data);
 
     return (
         <main className="min-w-full flex-grow flex flex-col justify-center items-center pt-5">

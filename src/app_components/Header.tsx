@@ -1,23 +1,11 @@
-import React, { useEffect, useState } from 'react';
 import Toggler from '@/components/ui/moontoggler';
 import logo from '/png/logo-no-background.png';
 import '@fontsource/roboto/500.css';
 import { NavLink } from 'react-router-dom';
-import Coordinates from '@/hooks/geolocation';
+import useCoordinates, { Coords } from '@/hooks/geolocation';
 
 function Header() {
-    const [locationData, setLocationData] = useState({ country: '', country_code: '' });
-
-    useEffect(() => {
-        const fetchCoordinates = async () => {
-            const data = await Coordinates();
-            if (data) {
-                setLocationData(data);
-            }
-        };
-
-        fetchCoordinates();
-    }, []);
+    const locationData: Coords = useCoordinates();
 
     const RedirectLinks = [
         { name: 'Home', link: '/' },
@@ -25,7 +13,7 @@ function Header() {
         { name: 'Weather', link: '/weather' },
         { name: 'Sports', link: '/sports' },
         { name: 'Tech', link: '/tech' },
-        { name: locationData.country, link: `/country/${locationData.country_code}` },
+        { name: locationData.country || 'Country', link: `/country/${locationData.country_code}` },
     ];
 
     return (
@@ -40,7 +28,7 @@ function Header() {
                     </div>
                 </div>
                 <div className='h-inherit flex justify-center items-center pr-[1.5rem]'>
-                    <div><Toggler /></div>
+                    <Toggler />
                 </div>
             </div>
             <div className='flex w-fit gap-3 m-auto max-sm:gap-[0.5rem]'>

@@ -11,7 +11,7 @@ type State = {
 
 type Actions = {
   setHydrated: () => void;
-  setLocation: (country: string, country_code: string) => void;
+  setLocation: (country: string | null, country_code: string | null) => void;
 };
 export const AuthStore = create<State & Actions>()(
   persist(
@@ -23,7 +23,7 @@ export const AuthStore = create<State & Actions>()(
       setHydrated() {
         set({ hydrated: true });
       },
-      setLocation(country: string, country_code: string) {
+      setLocation(country: string | null, country_code: string | null) {
         set({ country, country_code });
         set({ isLocation: true });
       },
