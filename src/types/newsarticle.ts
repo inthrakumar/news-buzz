@@ -10,7 +10,7 @@ export type News = {
   publish_date: string;
   author: string | null;
   language: string;
-  catgory: string;
+  category: string;
   source_country: string;
   sentiment: number;
 };

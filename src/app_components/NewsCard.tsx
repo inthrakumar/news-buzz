@@ -1,30 +1,34 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardDescription } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { News } from '@/types/newsarticle';
 import "@fontsource/poppins";
-type NewsCard = { news: News }
-function NewsCard({ news }: NewsCard) {
+
+type NewsCardProps = { news: News };
+
+function NewsCard({ news }: NewsCardProps) {
+    console.log(news.text);
     return (
         <section className='w-full h-[280px]'>
-            <Link to={`/news/${news.id}`}>
-                <div className='flex justify-center items-center w-full h-full '>
-                    <Card className='flex gap-0 w-[85%] items-start'>
-                        <CardContent className='w-1/2 h-inherit'>
-                            <div className='w-full h-full'>
-                                <img
-                                    src={news.image}
-                                    alt="news image"
-                                    className='object-contain w-full h-full filter brightness-125 contrast-110 transition-filter duration-300 hover:brightness-130 hover:contrast-120'
-                                />
+            <Link to={`/news/${news.id}`} className='w-full h-full'>
+                <div className='flex justify-center items-center w-full h-full'>
+                    <Card className='flex w-[85%] h-full'>
+                        <CardContent className='w-1/2 h-full'>
+                            <img
+                                src={news.image}
+                                alt="news image"
+                                className='object-cover w-full h-full transition-transform duration-300 hover:scale-105'
+                            />
+                        </CardContent>
+                        <CardContent className='w-1/2 p-4 flex flex-col justify-between'>
+                            <div className='text-[1rem] max-sm:text-[12px] max-lg:text-[14px] font-poppins'>
+                                {news.title}
+                            </div>
+                            <div className='flex flex-col justify-end space-x-1 text-sm'>
+                                <span className='text-nowrap text-clip'>{news.author}</span>
+                                <span className='text-nowrap text-clip'>{news.publish_date}</span>
                             </div>
                         </CardContent>
-
-                        <CardContent className='w-1/2 text-[1rem] max-sm:text-[12px] max-lg:text-[14rem] flex flex-col h-inherit font-poppins justify-between items-center'>
-                            <div className='w-full indent-1 h-fit '>{news.title}</div>
-                            <div className='w-full flex justify-end space-x-1'><span>{news.author}</span><span>{news.publish_date}</span></div>
-                        </CardContent>
-
                     </Card>
                 </div>
             </Link>
