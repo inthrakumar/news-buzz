@@ -35,10 +35,11 @@ function NewsCarousel({ top_news }: NewsCarouselProps) {
                                 style={{
                                     backgroundImage: `url('${imageUrl}')`,
                                     height: '350px',
-                                    backgroundSize: 'cover', backgroundRepeat: 'no-repeat',
-                                    imageRendering: 'auto'
-                                }}                            >
-                                {/* Overlay for dimming the background */}
+                                    width: '100%',
+                                    backgroundSize: 'cover',
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundPosition: 'center',
+                                }}>
                                 <div className="absolute inset-0 bg-black opacity-50"></div>
                                 <CardContent className="relative flex items-end w-inherit h-[350px] justify-center p-6">
                                     <Link to={`/news/${id}`}>
