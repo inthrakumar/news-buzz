@@ -1,7 +1,6 @@
 import { TopNews } from '@/types/types';
 import NewsCard from './NewsCard';
-import { News } from '../types/types';
-
+import { Button } from '@/components/ui/button';
 type NewsListProps = { topnews: TopNews | undefined };
 
 function NewsList({ topnews }: NewsListProps) {

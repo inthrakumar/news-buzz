@@ -23,9 +23,11 @@ const useCoordinates = (): Coords => {
           setCoords({ country, country_code });
           return;
         }
+
         const response = await axios.get(`https://api.ipify.org?format=json`);
         const { ip } = response.data;
-        const geo_response = await axios.get(`https://api.ipify.org`, {
+
+        const geo_response = await axios.get(`https://api.ip2location.io/`, {
           params: {
             key: env.location_api_key,
             ip: ip,

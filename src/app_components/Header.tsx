@@ -3,12 +3,19 @@ import logo from '/png/logo-no-background.png';
 import '@fontsource/roboto/500.css';
 import { NavLink } from 'react-router-dom';
 import Coordinates, { Coords } from '@/hooks/geolocation';
-import { Button } from '@/components/ui/button';
 import { AuthStore } from '@/store/auth';
 
 function Header() {
     const isLocation = AuthStore((state) => state.isLocation);
-    const locationData: Coords = Coordinates();
+    let locationData: Coords;
+    if (!isLocation) {
+        locationData = Coordinates();
+    } else {
+        locationData = AuthStore((state) => ({
+            country: state.country,
+            country_code: state.country_code
+        }));
+    }
 
     const RedirectLinks = [
         { name: 'Home', link: '/' },
@@ -16,11 +23,10 @@ function Header() {
         { name: 'Weather', link: '/weather' },
         { name: 'Sports', link: '/sports' },
         { name: 'Tech', link: '/tech' },
+        { name: `${locationData.country}`, link: `/news/${locationData.country_code}` }
     ];
 
-    const handleLocationFetch = () => {
-        const data = Coordinates();
-    };
+
 
     return (
         <div>
@@ -50,22 +56,7 @@ function Header() {
                         </NavLink>
                     </div>
                 ))}
-                {
-                    isLocation ? (
-                        <div key={locationData.country}>
-                            <NavLink
-                                to={`/${locationData.country_code}`}
-                                className={({ isActive }) =>
-                                    `font-roboto max-sm:text-[0.8rem] text-xl ${isActive ? 'text-red-500' : ''}`
-                                }
-                            >
-                                {locationData.country}
-                            </NavLink>
-                        </div>
-                    ) : (
-                        <Button onClick={handleLocationFetch} className='items-top h-fit pt-1 md:pt-[6px] pl-0 max-sm:text-[0.8rem] font-roboto' variant={'ghost'}>My Country</Button>
-                    )
-                }
+
             </div>
         </div>
     );

@@ -1,6 +1,5 @@
 import { AuthStore } from '../store/auth';
 import env from '@/env';
-import { useState, useEffect } from 'react';
 import { WeatherData } from '@/types/types';
 import axios from 'axios';
 const GetWeather = async (): Promise<WeatherData | null> => {
