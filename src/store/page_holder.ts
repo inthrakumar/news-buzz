@@ -1,54 +1,30 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
+import { TopNews } from '../types/types';
 
 type State = {
   hydrated: boolean;
+  TopNews: number;
   Sports: number;
   World: number;
   Country: number;
   Tech: number;
-};
-
-type Actions = {
   setHydrated: () => void;
-  setWorld: (index: number) => void;
-  setSports: (index: number) => void;
-  setCountry: (index: number) => void;
-  setTech: (index: number) => void;
 };
 
-export const AuthStore = create<State & Actions>()(
+export const PageContainerStore = create<State>()(
   persist(
     immer((set) => ({
       hydrated: false,
-      Sports: 0,
-      World: 0,
-      Country: 0,
-      Tech: 0,
+      TopNews: 1,
+      Sports: 1,
+      World: 1,
+      Country: 1,
+      Tech: 1,
       setHydrated() {
         set((state) => {
           state.hydrated = true;
-        });
-      },
-      setWorld(index: number) {
-        set((state) => {
-          state.World += index;
-        });
-      },
-      setSports(index: number) {
-        set((state) => {
-          state.Sports += index;
-        });
-      },
-      setTech(index: number) {
-        set((state) => {
-          state.Tech += index;
-        });
-      },
-      setCountry(index: number) {
-        set((state) => {
-          state.Country += index;
         });
       },
     })),
