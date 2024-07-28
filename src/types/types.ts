@@ -85,3 +85,24 @@ export type Id_News = {
   url: string;
   video: string | null;
 };
+
+export type C_news = {
+  id: number;
+  title: string;
+  text: string;
+  summary: string;
+  url: string;
+  image: string;
+  video: string | null;
+  publish_date: string;
+  author: string;
+  authors: string[];
+  language: string;
+  category: string;
+  source_country: string;
+  sentiment: number;
+};
+
+export type Category = {
+  news: C_news[];
+};

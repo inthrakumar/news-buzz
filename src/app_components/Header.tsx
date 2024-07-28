@@ -56,7 +56,7 @@ function Header() {
                         <NavLink
                             to={redirect.link}
                             className={({ isActive }) =>
-                                `font-roboto max-sm:text-[0.8rem] text-xl ${isActive ? 'text-red-500' : ''}`
+                                `font-roboto max-sm:text-[0.7rem] text-xl ${isActive ? 'text-red-500' : ''}`
                             }
                         >
                             {redirect.name}

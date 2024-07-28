@@ -21,7 +21,7 @@ function Home() {
             {data && (
                 <>
                     <NewsCarousel top_news={data} />
-                    <NewsList topnews={data} />
+                    <NewsList title="TopNews" topnews={data} />
                 </>
             )}
         </main>
