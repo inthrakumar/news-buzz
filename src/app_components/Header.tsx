@@ -36,7 +36,7 @@ function Header() {
     ];
 
     return (
-        <div>
+        <div className=''>
             <div className='flex justify-between w-full h-fit'>
                 <div className='flex'>
                     <div className='w-[90px] h-[90px] max-sm:w-[60px] max-sm:h-[60px] max-sm:text-2xl'>
@@ -50,7 +50,7 @@ function Header() {
                     <Toggler />
                 </div>
             </div>
-            <div className='flex w-fit gap-3 m-auto max-sm:gap-[0.5rem]'>
+            <div className='flex w-fit gap-3 m-auto max-sm:gap-[0.5rem]  '>
                 {RedirectLinks.map((redirect) => (
                     <div key={redirect.link}>
                         <NavLink

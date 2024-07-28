@@ -68,3 +68,20 @@ export type TopNews =
       news: News[];
     }[]
   | [];
+
+export type Id_News = {
+  author: string;
+  authors: string[];
+  category: string;
+  id: number;
+  image: string;
+  language: string;
+  publish_date: string;
+  sentiment: number;
+  source_country: string;
+  summary: string;
+  text: string;
+  title: string;
+  url: string;
+  video: string | null;
+};

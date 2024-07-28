@@ -27,7 +27,7 @@ function NewsCarousel({ top_news }: NewsCarouselProps) {
                     const newsItem = newsGroup.news[2];
                     const imageUrl = newsItem.image || '';
                     const title = newsItem.title || 'No title';
-                    const id = newsItem.id.toString();
+                    const id = newsItem.id;
                     return (
                         <CarouselItem key={index} className="h-inherit font-roboto">
                             <Card

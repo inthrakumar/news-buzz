@@ -20,6 +20,8 @@ module.exports = {
       fontFamily: {
         roboto: "Roboto,sans-serif",
         poppins: "Poppins,sans-serif",
+        Faustina: "Faustina Variable', serif",
+
       },
       colors: {
         border: "hsl(var(--border))",

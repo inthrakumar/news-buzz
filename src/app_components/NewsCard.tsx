@@ -7,7 +7,7 @@ import "@fontsource/poppins";
 type NewsCardProps = { news: News };
 
 function NewsCard({ news }: NewsCardProps) {
-    console.log(news);
+    console.log(String(news.id));
     return (
         <section className='w-full h-[280px] max-sm:h-[250px]'>
             <Link to={`/news/${news.id}`} className='w-full h-full'>
