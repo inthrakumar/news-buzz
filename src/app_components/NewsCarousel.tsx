@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { Link } from "react-router-dom";
-import type { TopNews } from '@/types/newsarticle';
+import type { TopNews } from '@/types/types';
 import "@fontsource/roboto"
 interface NewsCarouselProps {
     top_news: TopNews | undefined;
@@ -31,10 +31,9 @@ function NewsCarousel({ top_news }: NewsCarouselProps) {
                     return (
                         <CarouselItem key={index} className="h-inherit font-roboto">
                             <Card
-                                className="relative bg-cover"
+                                className="relative bg-cover h-[350px] max-sm:h-[300px]"
                                 style={{
                                     backgroundImage: `url('${imageUrl}')`,
-                                    height: '350px',
                                     width: '100%',
                                     backgroundSize: 'cover',
                                     backgroundRepeat: 'no-repeat',
