@@ -23,7 +23,7 @@ const router = createBrowserRouter(
       <Route path="sports" element={<Sports />} />
       <Route path="tech" element={<Tech />} />
       <Route path="weather" element={<Weather />} />
-      <Route path='country-news/:country_code' element={<Country />} />
+      <Route path='country-news/' element={<Country />} />
     </Route>
   )
 );

@@ -32,7 +32,7 @@ function Header() {
         { name: 'Tech', link: '/tech' },
         { name: 'Politics', link: '/politics' },
 
-        { name: `${locationData.country}`, link: `/news/${locationData.country_code}` },
+        { name: `${locationData.country}`, link: `/country-news` },
     ];
 
     return (

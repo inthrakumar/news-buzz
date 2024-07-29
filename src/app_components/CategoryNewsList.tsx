@@ -4,7 +4,7 @@ import { PageContainerStore } from '@/store/page_holder';
 import CategoryNewsCard from './CategoryNewsCard';
 
 type NewsListProps = {
-    title: string,
+    title: string | null,
     topnews: Category
 }
 
