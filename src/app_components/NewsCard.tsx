@@ -3,13 +3,16 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { News } from '@/types/types';
 import "@fontsource/poppins";
+import fallback from '/fallbackpic.jpg'
 
 type NewsCardProps = { news: News };
 
 function NewsCard({ news }: NewsCardProps) {
-    console.log(String(news.id));
+    const handleError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+        event.currentTarget.src = fallback;
+    };
     return (
-        <section className='w-full h-[280px] max-sm:h-[250px]'>
+        <section className='w-full h-[280px] max-sm:h-[230px]'>
             <Link to={`/news/${news.id}`} className='w-full h-full'>
                 <div className='flex justify-center items-center w-full h-full'>
                     <Card className='flex w-[90%]  max-sm:w-[95%] h-full'>
@@ -17,6 +20,7 @@ function NewsCard({ news }: NewsCardProps) {
                             <img
                                 src={news.image}
                                 alt="news image"
+                                onError={handleError}
                                 className='object-cover w-full h-full transition-transform duration-300 hover:scale-105'
                             />
                         </CardContent>

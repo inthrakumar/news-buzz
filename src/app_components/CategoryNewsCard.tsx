@@ -7,9 +7,8 @@ import "@fontsource/poppins";
 type CategoryNewsProps = { news: C_news };
 
 function CategoryNewsCard({ news }: CategoryNewsProps) {
-    console.log(String(news.id));
     return (
-        <section className='w-full h-[280px] max-sm:h-[250px]'>
+        <section className='w-full h-[280px] max-sm:h-[230px]'>
             <Link to={`/news/${news.id}`} className='w-full h-full'>
                 <div className='flex justify-center items-center w-full h-full'>
                     <Card className='flex w-[90%]  max-sm:w-[95%] h-full'>

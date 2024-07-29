@@ -1,11 +1,11 @@
-import { Id_News } from '@/types/types'
-import React from 'react'
-import '@fontsource-variable/faustina'
-import { Card, CardContent, CardDescription, CardHeader, CardFooter, CardTitle } from '@/components/ui/card'
+import { Id_News } from '@/types/types';
+import React from 'react';
+import '@fontsource-variable/faustina';
+import { Card, CardContent, CardDescription, CardHeader, CardFooter, CardTitle } from '@/components/ui/card';
 
 type News = {
-    news: Id_News
-}
+    news: Id_News;
+};
 
 function News({ news }: News) {
     return (
@@ -23,17 +23,18 @@ function News({ news }: News) {
                 </span>
             </CardDescription>
             <CardContent className="flex flex-col gap-6">
-                <div className="w-full h-[320px] sm:h-[280px]">
+                <div className="w-full">
                     <img
                         src={news.image}
                         alt="news image"
-                        className="object-cover w-full h-full transition-transform duration-300 rounded-md"
+                        className="w-full h-auto max-h-[280px] object-cover rounded-md transition-transform duration-300 hover:scale-105"
                     />
                 </div>
+
                 <div className="w-full max-sm:text-[16px] text-lg font-normal leading-relaxed text-gray-800 dark:text-white">
                     {news.text}
                 </div>
-                <a href={news.url} className="w-full text-left text-black dark:text-white text-[16px] hover:underline max-sm[6px]  break-words">
+                <a href={news.url} className="w-full text-left text-black dark:text-white text-[16px] hover:underline max-sm[6px] break-words">
                     {news.url}
                 </a>
             </CardContent>
@@ -42,7 +43,7 @@ function News({ news }: News) {
                 <span className="text-sm max-sm:text-[12px]">Date: {news.publish_date}</span>
             </CardFooter>
         </Card>
-    )
+    );
 }
 
-export default News
+export default News;

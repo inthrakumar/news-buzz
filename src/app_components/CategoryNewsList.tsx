@@ -9,7 +9,8 @@ type NewsListProps = {
 }
 
 function CategoryNewsList({ title, topnews }: NewsListProps) {
-    if (!topnews || !topnews.news || topnews.news.length === 0) {
+    console.log(topnews);
+    if (!topnews.news || topnews.news.length === 0) {
         return <div>No top news available.</div>;
     }
 
@@ -19,7 +20,6 @@ function CategoryNewsList({ title, topnews }: NewsListProps) {
 
     const startIndex = (page_num - 1) * itemsPerPage;
     const finishIndex = Math.min(startIndex + itemsPerPage, topnews.news.length);
-    console.log(startIndex, finishIndex);
 
     return (
         <section className='flex flex-col w-full mt-5 max-sm:mt-2 max-md:mt-3 gap-2'>
@@ -37,7 +37,7 @@ function CategoryNewsList({ title, topnews }: NewsListProps) {
                         key={index}
                         variant={'link'}
                         className={index + 1 === page_num ? 'text-red-400' : ''}
-                        onClick={() => PageContainerStore.setState({ TopNews: index + 1 })}
+                        onClick={() => PageContainerStore.setState({ Entertainment: index + 1 })}
                     >
                         {index + 1}
                     </Button>

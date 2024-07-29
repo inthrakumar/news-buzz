@@ -37,7 +37,7 @@ const CategoryNews = async (country_code: string | null, category: string) => {
   try {
     const currentDate = new Date();
     const sevendayAgoDate = new Date(
-      currentDate.getTime() - 24 * 7 * 60 * 60 * 1000
+      currentDate.getTime() - 24 * 10 * 60 * 60 * 1000
     );
     const sevendayAgoYear = sevendayAgoDate.getFullYear();
     const sevendayAgoMonth = String(sevendayAgoDate.getMonth() + 1).padStart(
@@ -46,6 +46,7 @@ const CategoryNews = async (country_code: string | null, category: string) => {
     );
     const sevendayAgoDay = String(sevendayAgoDate.getDate()).padStart(2, '0');
     const sevendayAgoDateISO = `${sevendayAgoYear}-${sevendayAgoMonth}-${sevendayAgoDay}`;
+    console.log(sevendayAgoDateISO);
     const response = await axios.get(
       'https://api.worldnewsapi.com/search-news',
       {
@@ -59,9 +60,8 @@ const CategoryNews = async (country_code: string | null, category: string) => {
         },
       }
     );
-    console.log(response.data.news);
     if (response && response.data) {
-      return response.data.news;
+      return response.data;
     }
   } catch (error) {
     console.error(error);
@@ -84,9 +84,7 @@ const UrlNews = async (id: number | undefined) => {
         },
       }
     );
-    console.log(response);
     if (response && response.data) {
-      console.log(response.data.news);
       return response.data.news[0];
     }
   } catch (error) {

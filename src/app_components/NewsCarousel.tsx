@@ -4,6 +4,8 @@ import Autoplay from "embla-carousel-autoplay";
 import { Link } from "react-router-dom";
 import type { TopNews } from '@/types/types';
 import "@fontsource/roboto"
+import fallback from '/fallbackpic.jpg'
+
 interface NewsCarouselProps {
     top_news: TopNews | undefined;
 }
@@ -33,7 +35,7 @@ function NewsCarousel({ top_news }: NewsCarouselProps) {
                             <Card
                                 className="relative bg-cover h-[350px] max-sm:h-[300px]"
                                 style={{
-                                    backgroundImage: `url('${imageUrl}')`,
+                                    backgroundImage: `url('${imageUrl}'),url('${fallback}')`,
                                     width: '100%',
                                     backgroundSize: 'cover',
                                     backgroundRepeat: 'no-repeat',
