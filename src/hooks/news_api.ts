@@ -14,6 +14,7 @@ const fourdayAgoDateISO = `${fourdayAgoYear}-${fourdayAgoMonth}-${fourdayAgoDay}
 // Fetch top news
 const fetchTopNews = async (country_code: string | null): Promise<TopNews> => {
   try {
+    const code = country_code?.toLowerCase();
     const response = await axios.get(
       `https://api.worldnewsapi.com/top-news?source-country=${country_code}&language=en&date=${fourdayAgoDateISO}`,
       {
@@ -36,6 +37,7 @@ const fetchTopNews = async (country_code: string | null): Promise<TopNews> => {
 // Fetch category news
 const CategoryNews = async (country_code: string | null, category: string) => {
   try {
+    const code = country_code?.toLowerCase();
     const currentDate = new Date();
     const sevendayAgoDate = new Date(
       currentDate.getTime() - 24 * 10 * 60 * 60 * 1000

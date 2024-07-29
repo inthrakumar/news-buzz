@@ -17,39 +17,42 @@ const useCoordinates = (): Coords => {
   useEffect(() => {
     const fetchCoordinates = async () => {
       try {
-        const { isLocation, country, country_code } = AuthStore.getState();
-
+        const { isLocation } = AuthStore.getState();
         if (isLocation) {
+          const { country, country_code } = AuthStore.getState();
+
           setCoords({ country, country_code });
           return;
         }
 
-        const response = await axios.get(`https://api.ipify.org?format=json`);
+        const response = await axios.get('https://api.ipify.org?format=json');
         const { ip } = response.data;
 
-        const geo_response = await axios.get(`https://api.ip2location.io/`, {
-          params: {
-            key: env.location_api_key,
-            ip: ip,
-            format: 'json',
-          },
-        });
+        const geo_response = await axios.post(
+          'https://location-api-point.vercel.app/api/ip-info',
+          { ip },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
 
-        const newCountry = geo_response.data.country_name;
-        const newCountryCode = geo_response.data.country_code;
-        const latitude = geo_response.data.latitude;
-        const longitude = geo_response.data.longitude;
+        const { country_name, country_code, latitude, longitude } =
+          geo_response.data;
+
+        console.log(latitude, longitude);
 
         AuthStore.setState((state) => ({
           ...state,
-          country: newCountry,
-          country_code: newCountryCode,
+          country: country_name,
+          country_code,
           latitude,
           longitude,
           isLocation: true,
         }));
 
-        setCoords({ country: newCountry, country_code: newCountryCode });
+        setCoords({ country: country_name, country_code });
       } catch (error) {
         console.error('Error getting geolocation:', error);
         setCoords({ country: null, country_code: null });
