@@ -34,13 +34,12 @@ const fetchTopNews = async (country_code: string | null): Promise<TopNews> => {
   return {} as TopNews;
 };
 
-// Fetch category news
 const CategoryNews = async (country_code: string | null, category: string) => {
   try {
     const code = country_code?.toLowerCase();
     const currentDate = new Date();
     const sevendayAgoDate = new Date(
-      currentDate.getTime() - 24 * 10 * 60 * 60 * 1000
+      currentDate.getTime() - 10 * 24 * 60 * 60 * 1000
     );
     const sevendayAgoYear = sevendayAgoDate.getFullYear();
     const sevendayAgoMonth = String(sevendayAgoDate.getMonth() + 1).padStart(
@@ -49,15 +48,20 @@ const CategoryNews = async (country_code: string | null, category: string) => {
     );
     const sevendayAgoDay = String(sevendayAgoDate.getDate()).padStart(2, '0');
     const sevendayAgoDateISO = `${sevendayAgoYear}-${sevendayAgoMonth}-${sevendayAgoDay}`;
-    console.log(sevendayAgoDateISO);
+
+    console.log(`Fetching news for category: ${category}, country: ${code}`);
+
     const response = await axios.get(
-      `https://api.worldnewsapi.com/search-news?earliest-publish-date=${sevendayAgoDateISO}&categories=${category}&source-countries=${country_code},us`,
+      `https://api.worldnewsapi.com/search-news?earliest-publish-date=${sevendayAgoDateISO}&categories=${category}&number=20&source-countries=${code}`,
       {
         headers: {
           'x-api-key': env.world_news_api,
         },
       }
     );
+
+    console.log(`Response for category ${category}:`, response.data);
+
     if (response && response.data) {
       return response.data;
     }
@@ -67,6 +71,7 @@ const CategoryNews = async (country_code: string | null, category: string) => {
 
   return {};
 };
+
 const Country_News = async (country: string | null) => {
   console.log('hit');
   try {
@@ -84,7 +89,7 @@ const Country_News = async (country: string | null) => {
     const sevendayAgoDateISO = `${sevendayAgoYear}-${sevendayAgoMonth}-${sevendayAgoDay}`;
     console.log(sevendayAgoDateISO);
     const response = await axios.get(
-      `https://api.worldnewsapi.com/search-news?earliest-publish-date=${sevendayAgoDateISO}&&text=${Country}`,
+      `https://api.worldnewsapi.com/search-news?earliest-publish-date=${sevendayAgoDateISO}&text=${Country}&number=50`,
       {
         headers: {
           'x-api-key': env.world_news_api,
@@ -101,7 +106,6 @@ const Country_News = async (country: string | null) => {
   return {};
 };
 
-// Fetch news by URL
 const UrlNews = async (id: number | undefined) => {
   try {
     const response = await axios.get(

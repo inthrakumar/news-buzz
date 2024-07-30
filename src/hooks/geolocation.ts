@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import env from '../env';
 import { AuthStore } from '@/store/auth';
 
 type Coords = {
@@ -17,42 +16,39 @@ const useCoordinates = (): Coords => {
   useEffect(() => {
     const fetchCoordinates = async () => {
       try {
-        const { isLocation } = AuthStore.getState();
+        const { isLocation, country, country_code } = AuthStore.getState();
         if (isLocation) {
-          const { country, country_code } = AuthStore.getState();
-
           setCoords({ country, country_code });
-          return;
+        } else {
+          const response = await axios.get('https://api.ipify.org?format=json');
+          const { ip } = response.data;
+
+          const geo_response = await axios.post(
+            'https://location-api-point.vercel.app/api/ip-info',
+            { ip },
+            {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }
+          );
+
+          const { country_name, country_code, latitude, longitude } =
+            geo_response.data;
+
+          console.log(latitude, longitude);
+
+          AuthStore.setState((state) => ({
+            ...state,
+            country: country_name,
+            country_code,
+            latitude,
+            longitude,
+            isLocation: true,
+          }));
+
+          setCoords({ country: country_name, country_code });
         }
-
-        const response = await axios.get('https://api.ipify.org?format=json');
-        const { ip } = response.data;
-
-        const geo_response = await axios.post(
-          'https://location-api-point.vercel.app/api/ip-info',
-          { ip },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
-
-        const { country_name, country_code, latitude, longitude } =
-          geo_response.data;
-
-        console.log(latitude, longitude);
-
-        AuthStore.setState((state) => ({
-          ...state,
-          country: country_name,
-          country_code,
-          latitude,
-          longitude,
-          isLocation: true,
-        }));
-
-        setCoords({ country: country_name, country_code });
       } catch (error) {
         console.error('Error getting geolocation:', error);
         setCoords({ country: null, country_code: null });

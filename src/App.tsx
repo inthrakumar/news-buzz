@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import Layout from './app_components/Layout';
 import Home from './pages/Home';
@@ -10,8 +10,9 @@ import NewsPage from '@/pages/NewsPage';
 import Sports from '@/pages/Sports';
 import Tech from '@/pages/Tech';
 import Weather from '@/pages/Weather';
-import Country from '@/pages/Country'
+import Country from '@/pages/Country';
 import { PageContainerStore } from '@/store/page_holder';
+import { AuthStore } from './store/auth';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,19 +28,23 @@ const router = createBrowserRouter(
     </Route>
   )
 );
+
 const queryclient = new QueryClient();
+
 function App() {
-
   const Refresh_fn = PageContainerStore((state) => state.resetCounters);
-  Refresh_fn();
-
+  const State_reset = AuthStore((state) => state.reset);
+  useEffect(() => {
+    Refresh_fn();
+    State_reset();
+  }, [Refresh_fn, State_reset]);
+  
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-      <QueryClientProvider client={queryclient} >
+      <QueryClientProvider client={queryclient}>
         <RouterProvider router={router} />
-      </QueryClientProvider >
-    </ThemeProvider >
-
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 

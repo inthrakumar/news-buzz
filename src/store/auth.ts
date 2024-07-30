@@ -14,16 +14,22 @@ type State = {
 type Actions = {
   setHydrated: () => void;
   setLocation: (country: string | null, country_code: string | null) => void;
+  reset: () => void;
 };
+
+const initialState: State = {
+  isLocation: false,
+  country: null,
+  country_code: null,
+  hydrated: false,
+  longitude: null,
+  latitude: null,
+};
+
 export const AuthStore = create<State & Actions>()(
   persist(
     immer((set) => ({
-      isLocation: false,
-      country: null,
-      country_code: null,
-      longitude: null,
-      latitude: null,
-      hydrated: false,
+      ...initialState,
       setHydrated() {
         set({ hydrated: true });
       },
@@ -31,13 +37,23 @@ export const AuthStore = create<State & Actions>()(
         set({ country, country_code });
         set({ isLocation: true });
       },
+      reset() {
+        set((state) => {
+          state.isLocation = initialState.isLocation;
+          state.country = initialState.country;
+          state.country_code = initialState.country_code;
+          state.hydrated = initialState.hydrated;
+          state.longitude = initialState.longitude;
+          state.latitude = initialState.latitude;
+        });
+      },
     })),
     {
       name: 'locationData',
       onRehydrateStorage() {
         return (state, error) => {
           if (error) {
-            console.log('persistance error');
+            console.log('Persistence error:', error);
           } else {
             state?.setHydrated();
           }

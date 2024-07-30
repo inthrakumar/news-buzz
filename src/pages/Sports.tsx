@@ -6,9 +6,9 @@ import { Category } from '@/types/types';
 import CategoryNewsList from '../app_components/CategoryNewsList';
 function Sports() {
     const country_code = AuthStore((state) => state.country_code);
-    const { isLoading, isError, data } = useQuery<Category | null>("sports", () => CategoryNews(country_code, "sports"), {
-        cacheTime: 21600000,
-        staleTime: 21600000,
+    const { isLoading, isError, data } = useQuery<Category | null>([`sports`, country_code], () => CategoryNews(country_code, "sports"), {
+        cacheTime: 360000,
+        staleTime: 360000,
         refetchOnMount: false,
         refetchOnWindowFocus: false,
         refetchOnReconnect: false,

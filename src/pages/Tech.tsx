@@ -6,9 +6,9 @@ import { Category } from '@/types/types';
 import CategoryNewsList from '../app_components/CategoryNewsList';
 function Technology() {
     const country_code = AuthStore((state) => state.country_code);
-    const { isLoading, isError, data } = useQuery<Category | null>("technology", () => CategoryNews(country_code, "technology"), {
-        cacheTime: 21600000,
-        staleTime: 21600000,
+    const { isLoading, isError, data } = useQuery<Category | null>([`technology`, country_code], () => CategoryNews(country_code, "technology"), {
+        cacheTime: 3600000,
+        staleTime: 3600000,
         refetchOnMount: false,
         refetchOnWindowFocus: false,
         refetchOnReconnect: false,
@@ -19,7 +19,7 @@ function Technology() {
             {isLoading && <div>Loading...</div>}
             {isError && <div>Error loading top news</div>}
             {data && (
-                <CategoryNewsList title='Technology' topnews={data} />
+                <CategoryNewsList title='Tech' topnews={data} />
             )}
         </main>
     )

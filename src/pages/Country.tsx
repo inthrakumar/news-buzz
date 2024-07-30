@@ -7,7 +7,7 @@ import CategoryNewsList from '../app_components/CategoryNewsList';
 function Country() {
     const country = AuthStore((state) => state.country);
     console.log(country);
-    const { isLoading, isError, data } = useQuery<Category | null>("india", () => Country_News(country!.toLowerCase()), {
+    const { isLoading, isError, data } = useQuery<Category | null>(`${country}`, () => Country_News(country!.toLowerCase()), {
         cacheTime: 21600000,
         staleTime: 21600000,
         refetchOnMount: false,
