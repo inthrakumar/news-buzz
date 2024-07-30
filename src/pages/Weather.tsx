@@ -21,13 +21,13 @@ function Weather() {
             enabled: lat !== undefined && lon !== undefined
         }
     );
-    if (isLoading) return <div><Loading /></div>;
-    if (isError) return <div><Error errorMessage="Error in fetching Weather data" /></div>;
+    if (isLoading) return <div className="min-w-full flex-grow flex flex-col justify-center items-center pt-5"><Loading /></div>;
+    if (isError) return <div className="min-w-full flex-grow flex flex-col justify-center items-center pt-5"><Error errorMessage="Error in fetching Weather data" /></div>;
 
     return (
         <div>
             {data && (
-                <div>
+                <div >
                     <WeatherDisplay data={data} />
                 </div>
             )}
