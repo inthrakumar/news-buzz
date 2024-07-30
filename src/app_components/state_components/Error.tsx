@@ -10,7 +10,7 @@ const Error_Component = ({ errorMessage }: Error) => {
     const { theme } = useTheme();
     const headerLogo = theme === 'light' ? logo : white_logo;
     return (
-        <div className="flex flex-col items-center justify-center h-full">
+        <div className="flex flex-col items-center justify-center min-h-[70%]">
             <img src={headerLogo} alt="Site Logo" className="w-24 h-auto mb-4" />
 
             <p className="text-lg text-red-500">{errorMessage}</p>

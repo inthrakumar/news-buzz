@@ -19,7 +19,7 @@ function Home() {
     });
     return (
         <main className="min-w-full flex-grow flex flex-col justify-center items-center pt-5">
-            {isLoading && <div><Loading /></div>}
+            {isLoading && <div className='h-[70%]'><Loading /></div>}
             {isError && <div><Error errorMessage="Error in Loading the news" /></div>}
             {data && (
                 <>
