@@ -49,8 +49,6 @@ const CategoryNews = async (country_code: string | null, category: string) => {
     const sevendayAgoDay = String(sevendayAgoDate.getDate()).padStart(2, '0');
     const sevendayAgoDateISO = `${sevendayAgoYear}-${sevendayAgoMonth}-${sevendayAgoDay}`;
 
-    console.log(`Fetching news for category: ${category}, country: ${code}`);
-
     const response = await axios.get(
       `https://api.worldnewsapi.com/search-news?earliest-publish-date=${sevendayAgoDateISO}&categories=${category}&number=20&source-countries=${code}`,
       {
@@ -59,8 +57,6 @@ const CategoryNews = async (country_code: string | null, category: string) => {
         },
       }
     );
-
-    console.log(`Response for category ${category}:`, response.data);
 
     if (response && response.data) {
       return response.data;
@@ -72,35 +68,39 @@ const CategoryNews = async (country_code: string | null, category: string) => {
   return {};
 };
 
-const Country_News = async (country: string | null) => {
-  console.log('hit');
+const Country_News = async (country: string | null): Promise<any> => {
   try {
+    if (country === null || country === undefined) {
+      return {};
+    }
+
     const currentDate = new Date();
     const sevendayAgoDate = new Date(
-      currentDate.getTime() - 24 * 10 * 60 * 60 * 1000
+      currentDate.getTime() - 7 * 24 * 60 * 60 * 1000 // 7 days ago
     );
     const sevendayAgoYear = sevendayAgoDate.getFullYear();
     const sevendayAgoMonth = String(sevendayAgoDate.getMonth() + 1).padStart(
       2,
       '0'
     );
-    const Country = country?.toLowerCase();
     const sevendayAgoDay = String(sevendayAgoDate.getDate()).padStart(2, '0');
     const sevendayAgoDateISO = `${sevendayAgoYear}-${sevendayAgoMonth}-${sevendayAgoDay}`;
-    console.log(sevendayAgoDateISO);
+    const Country = country.toLowerCase();
+
     const response = await axios.get(
       `https://api.worldnewsapi.com/search-news?earliest-publish-date=${sevendayAgoDateISO}&text=${Country}&number=50`,
       {
         headers: {
-          'x-api-key': env.world_news_api,
+          'x-api-key': env.world_news_api, // Ensure env.world_news_api is correctly set up
         },
       }
     );
+
     if (response && response.data) {
       return response.data;
     }
   } catch (error) {
-    console.error(error);
+    console.error('Error fetching news:', error);
   }
 
   return {};

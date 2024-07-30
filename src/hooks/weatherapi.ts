@@ -5,7 +5,6 @@ const GetWeather = async (
   lat: number | null,
   lon: number | null
 ): Promise<WeatherData | null> => {
-  console.log(lat, lon);
   try {
     const response = await axios.get(
       'https://api.openweathermap.org/data/2.5/weather',

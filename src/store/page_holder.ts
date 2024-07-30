@@ -11,7 +11,6 @@ type State = {
   Tech: number;
   setHydrated: () => void;
   resetCounters: () => void;
-  setPage: (title: string, page: number) => void;
 };
 
 export const PageContainerStore = create<State>()(
@@ -35,30 +34,6 @@ export const PageContainerStore = create<State>()(
           state.Entertainment = 1;
           state.Country = 1;
           state.Tech = 1;
-        });
-      },
-      setPage(title: string, page: number) {
-        set((state) => {
-          switch (title) {
-            case 'TopNews':
-              state.TopNews = page;
-              break;
-            case 'Sports':
-              state.Sports = page;
-              break;
-            case 'Entertainment':
-              state.Entertainment = page;
-              break;
-            case 'Country':
-              state.Country = page;
-              break;
-            case 'Tech':
-              state.Tech = page;
-              break;
-            default:
-              state.Country = page;
-              break;
-          }
         });
       },
     })),

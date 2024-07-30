@@ -3,6 +3,8 @@ import { UrlNews } from '@/hooks/news_api';
 import { useParams } from 'react-router-dom';
 import News from '@/app_components/News';
 import { Id_News } from '@/types/types';
+import Loading from '@/app_components/state_components/Loading';
+import Error from '@/app_components/state_components/Error'
 
 function NewsPage() {
     const { id } = useParams();
@@ -21,17 +23,16 @@ function NewsPage() {
     );
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div><Loading /></div>;
     }
 
     if (isError) {
-        return <div>Error loading news.</div>;
+        return <div><Error errorMessage="Error in Loading the news" /></div>;
     }
 
     if (!data) {
-        return <div>No news available.</div>;
+        return <div><Error errorMessage="No News Available" /></div>;
     }
-    console.log(data);
 
     return (
         <div className='w-full h-full mt-6 max-md:mt-4 max-sm:mt-2'>

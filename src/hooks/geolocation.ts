@@ -36,8 +36,6 @@ const useCoordinates = (): Coords => {
           const { country_name, country_code, latitude, longitude } =
             geo_response.data;
 
-          console.log(latitude, longitude);
-
           AuthStore.setState((state) => ({
             ...state,
             country: country_name,
@@ -50,7 +48,6 @@ const useCoordinates = (): Coords => {
           setCoords({ country: country_name, country_code });
         }
       } catch (error) {
-        console.error('Error getting geolocation:', error);
         setCoords({ country: null, country_code: null });
       }
     };

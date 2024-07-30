@@ -2,24 +2,22 @@ import { Category } from '@/types/types';
 import { Button } from '@/components/ui/button';
 import { PageContainerStore } from '@/store/page_holder';
 import CategoryNewsCard from './CategoryNewsCard';
-
+import Error from '@/app_components/state_components/Error';
 type NewsListProps = {
-    title: string | null,
-    topnews: Category
+    title: string | null;
+    topnews: Category;
 }
 
 function CategoryNewsList({ title, topnews }: NewsListProps) {
     console.log(topnews);
     if (!topnews.news || topnews.news.length === 0) {
-        return <div>No top news available.</div>;
+        return <div><Error errorMessage="Error in Loading the news" /></div>;
     }
 
     const itemsPerPage = 5;
     const totalPages = Math.ceil(topnews.news.length / itemsPerPage);
-    const state = PageContainerStore.getState();
 
-    
-    const getpage_num = (title: string) => {
+    const page_num = PageContainerStore((state) => {
         switch (title) {
             case 'Sports':
                 return state.Sports;
@@ -30,14 +28,26 @@ function CategoryNewsList({ title, topnews }: NewsListProps) {
             default:
                 return state.Country;
         }
-    };
-
-    // Fetch the page number
-    const page_num = getpage_num(title || '');
+    });
 
     const startIndex = (page_num - 1) * itemsPerPage;
     const finishIndex = Math.min(startIndex + itemsPerPage, topnews.news.length);
-    const setPage = PageContainerStore((state) => state.setPage);
+
+
+    const setPage = (page: number) => {
+        PageContainerStore.setState((state) => {
+            switch (title) {
+                case 'Sports':
+                    return { ...state, Sports: page };
+                case 'Entertainment':
+                    return { ...state, Entertainment: page };
+                case 'Tech':
+                    return { ...state, Tech: page };
+                default:
+                    return { ...state, Country: page };
+            }
+        });
+    };
 
     return (
         <section className='flex flex-col w-full mt-5 max-sm:mt-2 max-md:mt-3 gap-2'>
@@ -55,7 +65,7 @@ function CategoryNewsList({ title, topnews }: NewsListProps) {
                         key={index}
                         variant={'link'}
                         className={index + 1 === page_num ? 'text-red-400' : ''}
-                        onClick={() => setPage(title || '', index + 1)}
+                        onClick={() => setPage(index + 1)}
                     >
                         {index + 1}
                     </Button>

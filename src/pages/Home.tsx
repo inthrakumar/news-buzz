@@ -5,6 +5,9 @@ import { useQuery } from "react-query";
 import NewsList from "@/app_components/NewsList";
 import { TopNews } from '@/types/types';
 import { AuthStore } from '@/store/auth';
+import Loading from '@/app_components/state_components/Loading';
+import Error from '@/app_components/state_components/Error'
+
 function Home() {
     const country_code = AuthStore((state) => state.country_code);
     const { isLoading, isError, data } = useQuery<TopNews | null>("top_news", () => fetchTopNews(country_code), {
@@ -16,8 +19,8 @@ function Home() {
     });
     return (
         <main className="min-w-full flex-grow flex flex-col justify-center items-center pt-5">
-            {isLoading && <div>Loading...</div>}
-            {isError && <div>Error loading top news</div>}
+            {isLoading && <div><Loading /></div>}
+            {isError && <div><Error errorMessage="Error in Loading the news" /></div>}
             {data && (
                 <>
                     <NewsCarousel top_news={data} />

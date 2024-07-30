@@ -2,12 +2,12 @@ import { TopNews } from '@/types/types';
 import NewsCard from './NewsCard';
 import { Button } from '@/components/ui/button';
 import { PageContainerStore } from '@/store/page_holder';
-
+import Error from '@/app_components/state_components/Error';
 type NewsListProps = { topnews: TopNews | undefined, title: string };
 
 function NewsList({ title, topnews }: NewsListProps) {
     if (!topnews || topnews.length === 0) {
-        return <div>No top news available.</div>;
+        return <div><Error errorMessage="Error in Loading the news" /></div>;
     }
     const itemsPerPage = 7;
     const totalPages = Math.ceil(topnews.length / itemsPerPage);
@@ -15,7 +15,6 @@ function NewsList({ title, topnews }: NewsListProps) {
 
     const startIndex = (page_num - 1) * itemsPerPage;
     const finishIndex = Math.min(startIndex + itemsPerPage, topnews.length);
-    console.log(startIndex, finishIndex);
 
     return (
         <section className='flex flex-col w-full mt-5 max-sm:mt-2 max-md:mt-3 gap-2'>

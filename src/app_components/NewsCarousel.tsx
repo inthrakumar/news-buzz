@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 import type { TopNews } from '@/types/types';
 import "@fontsource/roboto"
 import fallback from '/fallbackpic.jpg'
-
+import Error from '@/app_components/state_components/Error';
 interface NewsCarouselProps {
     top_news: TopNews | undefined;
 }
 
 function NewsCarousel({ top_news }: NewsCarouselProps) {
     if (!top_news || top_news.length === 0) {
-        return <div>No news available</div>;
+        return <div><Error errorMessage="Error in Loading the news" /></div>;
     }
 
     return (

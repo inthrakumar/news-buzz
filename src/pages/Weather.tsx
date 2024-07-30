@@ -2,6 +2,8 @@ import React from 'react';
 import GetWeather from '@/hooks/weatherapi';
 import { AuthStore } from '../store/auth';
 import { useQuery } from 'react-query';
+import Loading from '@/app_components/state_components/Loading';
+import Error from '@/app_components/state_components/Error'
 
 function Weather() {
     const lat = AuthStore(state => state.latitude);
@@ -18,9 +20,8 @@ function Weather() {
             enabled: lat !== undefined && lon !== undefined
         }
     );
-    console.log(data);
-    if (isLoading) return <div>Loading...</div>;
-    if (isError) return <div>Error fetching weather data</div>;
+    if (isLoading) return <div><Loading /></div>;
+    if (isError) return <div><Error errorMessage="Error in fetching Weather data" /></div>;
 
     return (
         <div>
