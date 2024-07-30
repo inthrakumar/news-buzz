@@ -7,7 +7,7 @@ function Footer() {
                 <p>© 2022 NewsBuzz. All rights reserved.</p>
                 <p>Powered by World NewsAPI</p>
             </div>
-            <div className="flex gap-2 flex-wrap text-center sm:text-right flex-nowrap">
+            <div className="flex gap-2  text-center sm:text-right flex-nowrap">
                 <p>Contact Us: 123-456-7890</p>
                 <p>Email: support@newsbuzz.com</p>
             </div>
