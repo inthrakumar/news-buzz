@@ -4,13 +4,14 @@ import { AuthStore } from '../store/auth';
 import { useQuery } from 'react-query';
 import Loading from '@/app_components/state_components/Loading';
 import Error from '@/app_components/state_components/Error'
-
+import { WeatherData } from '@/types/types';
+import WeatherDisplay from '@/app_components/WeatherDisplay';
 function Weather() {
     const lat = AuthStore(state => state.latitude);
     const lon = AuthStore(state => state.longitude);
 
 
-    const { isLoading, isError, data } = useQuery(
+    const { isLoading, isError, data } = useQuery<WeatherData | null>(
         ['weather', lat, lon],
         () => GetWeather(lat, lon),
         {
@@ -27,6 +28,7 @@ function Weather() {
         <div>
             {data && (
                 <div>
+                    <WeatherDisplay data={data} />
                 </div>
             )}
         </div>

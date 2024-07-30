@@ -26,7 +26,7 @@ function Header() {
     ];
 
     return (
-        <div className=''>
+        <div className='mb-3 max-sm:mb-2'>
             <div className='flex justify-between w-full h-fit'>
                 <div className='flex'>
                     <div className='w-[90px] h-[90px] max-sm:w-[60px] max-sm:h-[60px] max-sm:text-2xl'>

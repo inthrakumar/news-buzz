@@ -9,7 +9,7 @@ function NewsList({ title, topnews }: NewsListProps) {
     if (!topnews || topnews.length === 0) {
         return <div><Error errorMessage="Error in Loading the news" /></div>;
     }
-    const itemsPerPage = 7;
+    const itemsPerPage = 10;
     const totalPages = Math.ceil(topnews.length / itemsPerPage);
     const page_num = PageContainerStore((state) => state.TopNews);
 
@@ -26,7 +26,7 @@ function NewsList({ title, topnews }: NewsListProps) {
                     <NewsCard key={index} news={news.news[2]} />
                 ))}
             </div>
-            <div className='flex justify-center mt-4'>
+            <div className='flex justify-center mt-4 gap-1'>
                 {Array.from({ length: totalPages }).map((_, index) => (
                     <Button
                         key={index}

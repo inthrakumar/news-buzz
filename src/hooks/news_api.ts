@@ -91,7 +91,7 @@ const Country_News = async (country: string | null): Promise<any> => {
       `https://api.worldnewsapi.com/search-news?earliest-publish-date=${sevendayAgoDateISO}&text=${Country}&number=50`,
       {
         headers: {
-          'x-api-key': env.world_news_api, // Ensure env.world_news_api is correctly set up
+          'x-api-key': env.world_news_api,
         },
       }
     );

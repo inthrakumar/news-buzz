@@ -7,14 +7,22 @@ type NewsListProps = {
     title: string | null;
     topnews: Category;
 }
-
 function CategoryNewsList({ title, topnews }: NewsListProps) {
+    const Categories = ["Entertainment", "Sports", "Tech", "Politics"];
+    if (title === null) {
+        return <Error errorMessage='Category title cant be null' />
+    }
     console.log(topnews);
     if (!topnews.news || topnews.news.length === 0) {
         return <div><Error errorMessage="Error in Loading the news" /></div>;
     }
 
-    const itemsPerPage = 5;
+    let itemsPerPage;
+    if (Categories.includes(title)) {
+        itemsPerPage = 5;
+    } else {
+        itemsPerPage = 7;
+    }
     const totalPages = Math.ceil(topnews.news.length / itemsPerPage);
 
     const page_num = PageContainerStore((state) => {
