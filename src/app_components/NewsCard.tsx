@@ -25,7 +25,7 @@ function NewsCard({ news }: NewsCardProps) {
                             />
                         </CardContent>
                         <CardContent className='w-1/2 p-4 flex flex-col justify-between'>
-                            <div className='text-[1rem] max-sm:text-[12px] max-lg:text-[14px] font-poppins overflow-hidden text-ellipsis' style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
+                            <div className='text-[1.2rem] max-sm:text-[14px] max-lg:text-[16px] font-poppins overflow-hidden text-ellipsis' style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
                                 {news.title}
                             </div>
                             <div className='text-[1rem] max-sm:text-[12px] max-lg:text-[14px] font-poppins overflow-hidden text-ellipsis' style={{ display: '-webkit-box', WebkitLineClamp: 5, WebkitBoxOrient: 'vertical' }}>

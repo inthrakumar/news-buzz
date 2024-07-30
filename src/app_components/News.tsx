@@ -2,12 +2,16 @@ import { Id_News } from '@/types/types';
 import React from 'react';
 import '@fontsource-variable/faustina';
 import { Card, CardContent, CardDescription, CardHeader, CardFooter, CardTitle } from '@/components/ui/card';
+import fallback from '/fallbackpic.jpg'
 
 type News = {
     news: Id_News;
 };
 
 function News({ news }: News) {
+    const handleError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+        event.currentTarget.src = fallback;
+    };
     return (
         <Card className="flex flex-col gap-6 font-Faustina p-6 shadow-lg rounded-lg dark:text-white">
             <CardHeader className="flex flex-col items-center pb-4 border-b">
@@ -26,6 +30,7 @@ function News({ news }: News) {
                 <div className="w-full">
                     <img
                         src={news.image}
+                        onError={handleError}
                         alt="news image"
                         className="w-full h-auto max-h-[280px] object-cover rounded-md transition-transform duration-300 hover:scale-105"
                     />

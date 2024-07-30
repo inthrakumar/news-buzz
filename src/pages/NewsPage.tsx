@@ -23,15 +23,15 @@ function NewsPage() {
     );
 
     if (isLoading) {
-        return <div><Loading /></div>;
+        return <div className='w-full min-h-[50%] flex items-center justify-center'><Loading /></div>;
     }
 
     if (isError) {
-        return <div><Error errorMessage="Error in Loading the news" /></div>;
+        return <div className='w-full h-[50%] flex items-center justify-center'><Error errorMessage="Error in Loading the news" /></div>;
     }
 
     if (!data) {
-        return <div><Error errorMessage="No News Available" /></div>;
+        return <div className='w-full h-[50%] flex items-center justify-center'><Error errorMessage="No News Available" /></div>;
     }
 
     return (
